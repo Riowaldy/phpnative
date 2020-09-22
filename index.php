@@ -1,4 +1,4 @@
-<?php include 'view/layout/header.php'; ?>
+<?php include 'view/layout/headerindex.php'; ?>
 <link rel="stylesheet" href="public/css/index.css">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -58,5 +58,5 @@
     </div>
 </div>
 
-<?php include 'view/layout/footer.php'; ?>
+<?php include 'view/layout/footerindex.php'; ?>
 <script src="public/js/index.js"></script>

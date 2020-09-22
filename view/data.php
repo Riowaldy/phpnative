@@ -17,23 +17,38 @@
         </ul>
     </div>
 </nav>
-<div class="container">
-    <div class="col-md-12">
-        <table id="cupang" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Harga</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php include "../model/readCupang.php" ?>
-            </tbody>
-        </table>
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Tabel Cupang</h4>
+                </div>
+                <div class="d-flex flex-row-reverse" style="margin: 0 25px 0 25px;">
+                    <a href="#tambah" class="btn btn-primary btn-raised btn-xs col-lg-1" data-toggle="modal" data-target="#form-tambah-settinguser" id="btn-tambah-settinguser"><i class=""></i>Tambah</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="cupang">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Harga</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php include "../model/readCupang.php" ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+<?php include 'modal/cupangModal.php'; ?>
 <?php include 'layout/footer.php'; ?>
 <script src="../controller/cupang.js"></script>
 
