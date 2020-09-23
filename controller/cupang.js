@@ -157,6 +157,61 @@ var cupang = function () {
             });
         });
     };
+
+    var deleteData = function () {
+        $('#cupang').on('click', '#btn-hapus', function () {
+            var baris = $(this).parents('tr')[0];
+            var table = $('#cupang').DataTable();
+            var data = table.row(baris).data();
+            id = data[0];
+            swal({
+                title: 'Apakah Anda Yakin?',
+                text: 'Menghapus Data Cupang Ini',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#2196F3',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                showLoaderOnConfirm: true
+            })
+            .then((isConfirm) => {
+                window.onkeydown = null;
+                window.onfocus = null;
+                if (isConfirm) {
+                    var delData = {
+                        id: id,
+                    };
+                    $.ajax({
+                        url : "../model/deleteCupang.php",
+                        type : "POST",
+                        data : delData,
+                        success: function(res){
+                            console.log(res);
+                            swal({
+                                title: "Success!",
+                                text : "Data Berhasil Dihapus",
+                                confirmButtonColor: "#66BB6A",
+                                type : "success",
+                            });
+                            location.reload();
+                        },
+                        error : function(res){
+                            swal({
+                                title: 'Error',
+                                text : data.message,
+                                type : "error",
+                                confirmButtonColor: "#EF5350",
+                            });
+                        }
+                    })
+                } else {
+                    swal("Aksi Dibatalkan!");
+                }
+            });
+        });
+    };
     return {
         init: function () {
             getDataCupang();
@@ -164,6 +219,7 @@ var cupang = function () {
             tambahData();
             getDataEdit();
             editData();
+            deleteData();
         }
     };
 }();
