@@ -1,9 +1,5 @@
-$('.carousel').carousel({
-    interval: 2000
-});
-
 $.ajax({
-    url: "model/checkSession.php",
+    url: "../model/checkSession.php",
     type: "GET",
     cache: false,
     success: function(dataResult){
@@ -11,34 +7,25 @@ $.ajax({
         if(dataResult.statusCode==200){
             $('#navbarSupportedContent').append(
                 '<ul class="navbar-nav mr-auto">' +
-                    '<li class="nav-item active">'+
-                        '<a class="nav-link" href="index.php">Home</a>'+
-                    '</li>'+
                     '<li class="nav-item">'+
-                        '<a class="nav-link" href="view/data.php">Akses Data</a>'+
+                        '<a class="nav-link" href="../index.php">Home</a>'+
+                    '</li>'+
+                    '<li class="nav-item active">'+
+                        '<a class="nav-link" href="data.php">Akses Data</a>'+
                     '</li>'+
                     '<li class="nav-item dropdown">'+
                         '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
                             dataResult.username+
                         '</a>'+
                         '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">'+
-                            '<a class="dropdown-item" href="model/logout.php">Logout</a>'+
+                            '<a class="dropdown-item" href="../model/logout.php">Logout</a>'+
                         '</div>'+
                     '</li>'+
                 '</ul>'
             );
         }
         else if(dataResult.statusCode==201){
-            $('#navbarSupportedContent').append(
-                '<ul class="navbar-nav mr-auto">' +
-                    '<li class="nav-item active">'+
-                        '<a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>'+
-                    '</li>'+
-                    '<li class="nav-item">'+
-                        '<a class="nav-link" href="view/login.php">Login</a>'+
-                    '</li>'+
-                '</ul>'
-            );
+            location.href = "../view/login.php";
         }
     }
 });
