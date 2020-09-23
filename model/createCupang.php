@@ -6,9 +6,12 @@
 
     $id = $row['id'];
     $nama = $_POST['nama'];
+    date_default_timezone_set('Asia/Jakarta');
+    $updated_at = date("Y-m-d h:i:s A");
+    $created_at = date("Y-m-d h:i:s A");
 
-    $sql = "INSERT INTO cupang (id, nama)
-    VALUES ($id, '$nama')";
+    $sql = "INSERT INTO cupang (id, nama, updated_at, created_at)
+    VALUES ($id, '$nama', '$updated_at', '$created_at')";
     if (mysqli_query($conn, $sql)) {
         echo json_encode(array("statusCode"=>200));
 	} 
