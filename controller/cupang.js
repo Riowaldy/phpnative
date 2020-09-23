@@ -1,6 +1,26 @@
 var cupang = function () {
     var getDataCupang = function(){
         var t = $('#cupang').DataTable({
+            'ajax': {
+                'url': '../model/readCupang.php',
+                'dataSrc': ''
+            },
+            'columns': [
+                { 'data': 'id'},
+                { 'data': 'nama'},
+                {
+                    'render': function (data, type, full, meta) {
+                        var html = '';
+                        html += '<div class="text-center">';
+                        html += '<div class="btn-group btn-group-solid">';
+                        html += '<a href="#edit" class="btn btn-primary btn-raised btn-xs" data-toggle="modal" data-target="#form-edit" id="btn-edit" title="Ubah Data"><i class="fas fa-edit"></i></a>';
+                        html += '<a href="#hapus" class="btn btn-danger btn-raised btn-xs" id="btn-hapus" title="Hapus Data"><i class="fas fa-trash"></i></a>';
+                        html += '</div>';
+                        html += '</div>';
+                        return html;
+                    }
+                }
+            ],
             "order": [],
             "columnDefs": [
                 { "orderable": false, "targets": [0,2] }
@@ -9,8 +29,8 @@ var cupang = function () {
         t.on( 'order.dt search.dt', function () {
             t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
                 cell.innerHTML = i+1;
-            });
-        }).draw();
+            } );
+        } ).draw();
     };
 
     var resetData = function(){
@@ -59,6 +79,7 @@ var cupang = function () {
                             type : "POST",
                             data : addData,
                             success: function(res){
+                                $('#cupang').DataTable().ajax.reload();
                                 swal({
                                     title: "Success!",
                                     text : "Data Berhasil Ditambahkan",
@@ -66,7 +87,6 @@ var cupang = function () {
                                     type : "success",
                                 });
                                 $('#form-tambah').modal('hide');
-                                location.reload();
                             },
                             error : function(res){
                                 swal({
@@ -130,6 +150,7 @@ var cupang = function () {
                             type : "POST",
                             data : update,
                             success: function(res){
+                                $('#cupang').DataTable().ajax.reload();
                                 swal({
                                     title: "Success!",
                                     text : "Data Berhasil Diubah",
@@ -137,7 +158,6 @@ var cupang = function () {
                                     type : "success",
                                 });
                                 $('#form-edit').modal('hide');
-                                location.reload();
                             },
                             error : function(res){
                                 swal({
@@ -188,14 +208,13 @@ var cupang = function () {
                         type : "POST",
                         data : delData,
                         success: function(res){
-                            console.log(res);
+                            $('#cupang').DataTable().ajax.reload();
                             swal({
                                 title: "Success!",
                                 text : "Data Berhasil Dihapus",
                                 confirmButtonColor: "#66BB6A",
                                 type : "success",
                             });
-                            location.reload();
                         },
                         error : function(res){
                             swal({

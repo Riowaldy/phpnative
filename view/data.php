@@ -29,9 +29,6 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php include "../model/readCupang.php" ?>
-                            </tbody>
                         </table>
                     </div>
                 </div>
