@@ -16,8 +16,76 @@ var cupang = function () {
     var resetData = function(){
         $('#btn-reset-edit').click(function(){
             $("#nama_cupang_error").html("");
+            $("#nama_cupang_tambah_error").html("");
+            $('#nama_cupang_tambah').val("");
+            $('#nama_cupang').val("");
+        });
+        $('#btn-reset-tambah').click(function(){
+            $("#nama_cupang_error").html("");
+            $("#nama_cupang_tambah_error").html("");
+            $('#nama_cupang_tambah').val("");
+            $('#nama_cupang').val("");
         });
     }
+
+    var tambahData = function () {
+        $('#btn-simpan-tambah').click(function(){
+            swal({
+                title: 'Apakah Anda Yakin?',
+                text: 'Menyimpan Data Cupang Ini',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#2196F3',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                showLoaderOnConfirm: true
+            })
+            .then((isConfirm) => {
+                window.onkeydown = null;
+                window.onfocus = null;
+                if (isConfirm) {
+                    var addData = {
+                        nama: $('#nama_cupang_tambah').val(),
+                    };
+                    if(addData.nama == ""){
+                        $("#nama_cupang_tambah_error").html("<strong>Data Nama Kosong</strong>");
+                    }
+                    else{
+                        $("#nama_cupang_tambah_error").html("");
+                        $.ajax({
+                            url : "../model/createCupang.php",
+                            type : "POST",
+                            data : addData,
+                            success: function(res){
+                                swal({
+                                    title: "Success!",
+                                    text : "Data Berhasil Ditambahkan",
+                                    confirmButtonColor: "#66BB6A",
+                                    type : "success",
+                                });
+                                $('#form-tambah').modal('hide');
+                                location.reload();
+                            },
+                            error : function(res){
+                                swal({
+                                    title: 'Error',
+                                    text : "Data Gagal Ditambahkan",
+                                    type : "error",
+                                    confirmButtonColor: "#EF5350",
+                                });
+                                $('#form-tambah').modal('hide');
+                            }
+                        })
+                    }
+                } else {
+                    swal("Aksi Dibatalkan!");
+                    $('#form-tambah').modal('hide');
+                }
+            });
+        });
+    };
 
     var getDataEdit = function(){
         $('#cupang').on('click', '#btn-edit', function () {
@@ -93,6 +161,7 @@ var cupang = function () {
         init: function () {
             getDataCupang();
             resetData();
+            tambahData();
             getDataEdit();
             editData();
         }

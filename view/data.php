@@ -25,7 +25,7 @@
                     <h4>Tabel Cupang</h4>
                 </div>
                 <div class="d-flex flex-row-reverse" style="margin: 0 25px 0 25px;">
-                    <a href="#tambah" class="btn btn-primary btn-raised btn-xs col-lg-1" data-toggle="modal" data-target="#form-tambah-settinguser" id="btn-tambah-settinguser"><i class=""></i>Tambah</a>
+                    <a href="#tambah" class="btn btn-primary btn-raised btn-xs col-lg-1" data-toggle="modal" data-target="#form-tambah" id="btn-tambah"><i class=""></i>Tambah</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
